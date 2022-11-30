@@ -7,9 +7,13 @@
 	$: firstLetter = word[0].toUpperCase();
 </script>
 
-<div class="px-2 relative" class:higlighted style={`--letter: '${firstLetter}'`}>
+<div
+	class="px-2 relative py-1 hover:bg-neutral-50/5"
+	class:higlighted
+	style={`--letter: '${firstLetter}'`}
+>
 	<span class="numeral text-neutral-50/20">{paddedNumeral}</span>
-	<span class="word">{word}</span>
+	<span>{word}</span>
 </div>
 
 <style lang="postcss">
@@ -20,6 +24,10 @@
 
 		.numeral {
 			@apply text-orange-400/40;
+		}
+
+		&:hover {
+			@apply bg-neutral-50/5;
 		}
 
 		&::before {

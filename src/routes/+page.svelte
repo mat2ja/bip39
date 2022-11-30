@@ -8,10 +8,18 @@
 	};
 </script>
 
-<main class="columns-2 sm:columns-3 lg:columns-4 gap-8">
+<header>
+	<h1 class="text-2xl">BIP39 Wordlist</h1>
+	<a
+		href="https://halborn.com/what-is-a-bip39/"
+		class="inline-block -ml-1 px-1 mt-2 underline text-sm text-neutral-300/90 decoration-orange-400/50  hover:decoration-orange-400 hover:bg-orange-400/20 hover:opacity-100"
+	>
+		What is BIP39?
+	</a>
+</header>
+
+<main class="mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
 	{#each wordlist as word, i}
-		<div class="py-1">
-			<Word {word} numeral={i + 1} higlighted={isFirstExampleOfLetter(word, i)} />
-		</div>
+		<Word {word} numeral={i + 1} higlighted={isFirstExampleOfLetter(word, i)} />
 	{/each}
 </main>
