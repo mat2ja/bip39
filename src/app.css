@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap');
+html {
+	color-scheme: dark;
+	font-family: 'Anonymous Pro', monospace;
+}
+
+body {
+	@apply bg-neutral-900 text-neutral-300;
+}
