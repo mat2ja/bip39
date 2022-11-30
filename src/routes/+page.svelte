@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Word from '../lib/components/Word.svelte';
-	import { wordlist } from '../wordlist';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+	$: ({ wordlist } = data);
 
 	const isFirstExampleOfLetter = (word: string, index: number) => {
 		if (index === 0) return true;
