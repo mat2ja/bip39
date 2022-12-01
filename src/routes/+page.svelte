@@ -3,6 +3,7 @@
 	import LanguagePicker from '$lib/components/LanguagePicker.svelte';
 	import Word from '$lib/components/Word.svelte';
 	import WordSearch from '$lib/components/WordSearch.svelte';
+	import { isEnglish, normalize } from '$lib/utils';
 	import Icon from '@iconify/svelte';
 	import type { PageData } from './$types';
 
@@ -12,14 +13,11 @@
 	type Lang = keyof typeof wordlists;
 
 	let lang: Lang = 'en';
-	let languages = Object.keys(wordlists).sort() as Lang[];
 	$: wordlist = wordlists[lang];
 
 	let search = '';
 	$: _search = search.toLowerCase().trim();
-	const clearSearch = () => {
-		search = '';
-	};
+	const clearSearch = () => (search = '');
 
 	const wordOrdinal = (word: string) => {
 		return wordlist.indexOf(word) + 1;
@@ -27,14 +25,6 @@
 
 	const paddedOrdinal = (word: string) => {
 		return wordOrdinal(word).toString().padStart(4, '0');
-	};
-
-	const normalize = (string: string) => {
-		return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-	};
-
-	const isEnglish = (word: string) => {
-		return /^[a-z]+$/i.test(word);
 	};
 
 	$: filteredWordlist = wordlist.filter((word) => {
@@ -58,16 +48,18 @@
 		return paddedOrdinalMatch || ordinalMatch;
 	});
 
-	const isFirstExampleOfLetter = (word: string, index: number) => {
+	const isFirstExampleOfLetter = (word: string, idx: number) => {
 		if (['cn', 'cnt'].includes(lang)) return false;
-		if (index === 0) return true;
+
+		if (idx === 0) return true;
+
 		const firstLetter = (word: string) => word.at(0);
-		return firstLetter(word) !== firstLetter(filteredWordlist[index - 1]);
+		return firstLetter(word) !== firstLetter(filteredWordlist[idx - 1]);
 	};
 </script>
 
 <header>
-	<LanguagePicker bind:lang {languages} />
+	<LanguagePicker bind:lang {wordlists} />
 	<div class="flex flex-col sm:flex-row items-start justify-between gap-8 mt-6">
 		<HeaderInfo />
 

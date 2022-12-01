@@ -1,10 +1,14 @@
 <script lang="ts">
-	export let languages: string[];
-	export let lang = 'en';
+	export let wordlists: Record<string, string[]>;
+	export let lang: Lang = 'en';
 
-	const setLang = (_lang: string) => {
+	type Lang = keyof typeof wordlists;
+
+	const setLang = (_lang: Lang) => {
 		lang = _lang;
 	};
+
+	let languages = Object.keys(wordlists).sort() as Lang[];
 </script>
 
 <div class="text-neutral-50/20 hover:text-neutral-50/10 flex items-center justify-end gap-1">
