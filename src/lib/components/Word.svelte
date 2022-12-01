@@ -1,14 +1,14 @@
 <script lang="ts">
-	export let numeral: number;
+	export let ordinal: number;
 	export let word: string;
-	export let higlighted: boolean = true;
+	export let higlighted: boolean = false;
 
-	$: paddedNumeral = numeral.toString().padStart(4, '0');
+	$: paddedNumeral = ordinal.toString().padStart(4, '0');
 	$: firstLetter = word[0].toUpperCase();
 </script>
 
 <div
-	class="px-2 relative py-1 hover:bg-neutral-50/5 rounded-sm"
+	class="relative px-2 py-1 hover:bg-neutral-50/5 rounded-sm"
 	class:higlighted
 	style={`--letter: '${firstLetter}'`}
 >
@@ -32,7 +32,7 @@
 
 		&::before {
 			content: var(--letter);
-			@apply absolute left-[-20px] text-orange-500;
+			@apply absolute left-[-20px] text-orange-500 font-semibold;
 		}
 	}
 </style>

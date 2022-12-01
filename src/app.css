@@ -9,6 +9,7 @@
 html {
 	color-scheme: dark;
 	scroll-behavior: smooth;
+	overflow-y: overlay;
 }
 
 body {
@@ -25,8 +26,8 @@ html {
 }
 
 ::-webkit-scrollbar {
-	height: 5px;
-	width: 5px;
+	height: 4px;
+	width: 4px;
 	background: transparent;
 }
 
