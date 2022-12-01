@@ -20,22 +20,22 @@
 	</style>
 </svelte:head>
 
-<div class="relative mx-auto flex min-h-screen max-w-6xl flex-col px-8 pb-12 font-mono sm:pb-24">
+<div
+	class="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-8 pb-12 font-mono sm:pb-16"
+>
 	<Nav />
 
-	<div class="flex flex-1 flex-col space-y-12 pt-[20vh] sm:space-y-24">
-		<main class="flex h-full flex-1 flex-col">
-			<slot />
-		</main>
+	<main class="flex h-full flex-1 flex-col">
+		<slot />
+	</main>
 
-		{#if scrollToTopShown}
-			<div in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-				<ScrollToTopButton />
-			</div>
-		{/if}
-
-		<div class="mt-auto">
-			<Footer />
+	{#if scrollToTopShown}
+		<div in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
+			<ScrollToTopButton />
 		</div>
+	{/if}
+
+	<div class="mt-auto">
+		<Footer />
 	</div>
 </div>

@@ -1,8 +1,8 @@
+import type { ServerLoad } from '@sveltejs/kit';
 import { wordlist } from './wordlist.server';
 
-/** @type {import('./$types').PageLoad} */
-export function load() {
+export const load: ServerLoad = () => {
 	return {
 		wordlist
 	};
-}
+};

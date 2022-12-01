@@ -3,6 +3,10 @@
 		{
 			href: '/bip39',
 			label: 'bip39'
+		},
+		{
+			href: '/balance',
+			label: 'balance'
 		}
 	];
 </script>

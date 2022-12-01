@@ -1,8 +1,8 @@
 <script lang="ts">
+	import type { Lang } from '$lib/models/bip39';
+
 	export let wordlists: Record<string, string[]>;
 	export let lang: Lang = 'en';
-
-	type Lang = keyof typeof wordlists;
 
 	const setLang = (_lang: Lang) => {
 		lang = _lang;

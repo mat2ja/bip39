@@ -2,15 +2,14 @@
 	import HeaderInfo from '$lib/components/bip39/HeaderInfo.svelte';
 	import LanguagePicker from '$lib/components/bip39/LanguagePicker.svelte';
 	import Word from '../../lib/components/bip39/Word.svelte';
-	import WordSearch from '$lib/components/bip39/WordSearch.svelte';
 	import { isEnglish, normalize } from '$lib/utils';
 	import Icon from '@iconify/svelte';
 	import type { PageData } from '../$types';
+	import SearchInput from '$lib/components/SearchInput.svelte';
+	import type { Lang } from '$lib/models/bip39';
 
 	export let data: PageData;
 	const { wordlist: wordlists } = data;
-
-	type Lang = keyof typeof wordlists;
 
 	let lang: Lang = 'en';
 	$: wordlist = wordlists[lang];
@@ -27,7 +26,7 @@
 		return wordOrdinal(word).toString().padStart(4, '0');
 	};
 
-	$: filteredWordlist = wordlist.filter((word) => {
+	$: filteredWordlist = wordlist.filter((word: string) => {
 		if (!isEnglish(_search)) {
 			const nativeWordMatch = word.startsWith(_search);
 			return nativeWordMatch;
@@ -58,32 +57,34 @@
 	};
 </script>
 
-<header>
-	<LanguagePicker bind:lang {wordlists} />
-	<div class="mt-6 flex flex-col items-start justify-between gap-8 sm:flex-row">
-		<HeaderInfo />
+<div class="space-y-8">
+	<header>
+		<LanguagePicker bind:lang {wordlists} />
+		<div class="mt-6 flex flex-col items-start justify-between gap-8 sm:flex-row">
+			<HeaderInfo />
 
-		<WordSearch bind:search />
-	</div>
-</header>
+			<SearchInput bind:value={search} />
+		</div>
+	</header>
 
-<section>
-	{#if filteredWordlist?.length}
-		<div class="mt-10 cursor-crosshair columns-1 gap-8 sm:mt-16 sm:columns-3 md:columns-4">
-			{#each filteredWordlist as word, i}
-				<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
-			{/each}
-		</div>
-	{:else}
-		<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/20">
-			<p class="px-2">no words found</p>
-			<button
-				on:click={clearSearch}
-				class="flex items-center gap-1 rounded-sm bg-neutral-50/5 px-2 py-1 text-sm ring-neutral-600 hover:text-neutral-50/40 focus:outline-none focus:ring-2"
-			>
-				clear
-				<Icon icon="ic:sharp-clear" class="text-base" />
-			</button>
-		</div>
-	{/if}
-</section>
+	<section>
+		{#if filteredWordlist?.length}
+			<div class="cursor-crosshair columns-1 gap-8 sm:mt-16 sm:columns-3 md:columns-4">
+				{#each filteredWordlist as word, i}
+					<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
+				{/each}
+			</div>
+		{:else}
+			<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/20">
+				<p class="px-2">no words found</p>
+				<button
+					on:click={clearSearch}
+					class="flex items-center gap-1 rounded-sm bg-neutral-50/5 px-2 py-1 text-sm ring-neutral-600 hover:text-neutral-50/40 focus:outline-none focus:ring-2"
+				>
+					clear
+					<Icon icon="ic:sharp-clear" class="text-base" />
+				</button>
+			</div>
+		{/if}
+	</section>
+</div>
