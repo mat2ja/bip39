@@ -1,8 +1,10 @@
 <script lang="ts">
-	import Word from '$lib/components/Word.svelte';
-	import type { PageData } from './$types';
-	import Icon from '@iconify/svelte';
+	import HeaderInfo from '$lib/components/HeaderInfo.svelte';
 	import LanguagePicker from '$lib/components/LanguagePicker.svelte';
+	import Word from '$lib/components/Word.svelte';
+	import WordSearch from '$lib/components/WordSearch.svelte';
+	import Icon from '@iconify/svelte';
+	import type { PageData } from './$types';
 
 	export let data: PageData;
 	const { wordlist: wordlists } = data;
@@ -14,64 +16,82 @@
 	$: wordlist = wordlists[lang];
 
 	let search = '';
+	$: _search = search.toLowerCase().trim();
 	const clearSearch = () => {
 		search = '';
 	};
-
-	$: filteredWordlist = wordlist.filter((word) => {
-		return word.toLowerCase().startsWith(search.toLowerCase());
-	});
 
 	const wordOrdinal = (word: string) => {
 		return wordlist.indexOf(word) + 1;
 	};
 
+	const paddedOrdinal = (word: string) => {
+		return wordOrdinal(word).toString().padStart(4, '0');
+	};
+
+	const normalize = (string: string) => {
+		return string.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+	};
+
+	const isEnglish = (word: string) => {
+		return /^[a-z]+$/i.test(word);
+	};
+
+	$: filteredWordlist = wordlist.filter((word) => {
+		if (!isEnglish(_search)) {
+			const nativeWordMatch = word.startsWith(_search);
+			return nativeWordMatch;
+		}
+
+		const wordMatch = normalize(word).startsWith(normalize(_search));
+		if (wordMatch) return true;
+
+		const normalizedWordMatch = normalize(word).startsWith(normalize(_search));
+		if (normalizedWordMatch) return true;
+
+		const parsedNumber = parseInt(_search);
+		if (isNaN(parsedNumber)) return false;
+
+		const paddedOrdinalMatch = paddedOrdinal(word).startsWith(search);
+		const ordinalMatch = wordOrdinal(word).toString().startsWith(parsedNumber.toString());
+
+		return paddedOrdinalMatch || ordinalMatch;
+	});
+
 	const isFirstExampleOfLetter = (word: string, index: number) => {
+		if (['cn', 'cnt'].includes(lang)) return false;
 		if (index === 0) return true;
 		const firstLetter = (word: string) => word.at(0);
 		return firstLetter(word) !== firstLetter(filteredWordlist[index - 1]);
 	};
 </script>
 
-<header class="">
+<header>
 	<LanguagePicker bind:lang {languages} />
-
 	<div class="flex flex-col sm:flex-row items-start justify-between gap-8 mt-6">
-		<div>
-			<h1 class="text-2xl">BIP39 Wordlist</h1>
-			<a
-				href="https://halborn.com/what-is-a-bip39/"
-				class="inline-block -ml-1 px-1 mt-2 underline text-sm text-neutral-300/90 decoration-orange-400/50  hover:decoration-orange-400 hover:bg-orange-400/20 hover:opacity-100 rounded-sm"
-			>
-				What is BIP39?
-			</a>
-		</div>
+		<HeaderInfo />
 
-		<input
-			aria-label="Search word"
-			placeholder="Search"
-			type="search"
-			bind:value={search}
-			class="py-2 px-3 bg-neutral-50/5 focus:ring-1 ring-orange-500 focus:outline-none placeholder:text-neutral-600 rounded-sm w-full sm:w-fit "
-		/>
+		<WordSearch bind:search />
 	</div>
 </header>
 
-{#if filteredWordlist?.length}
-	<main class="mt-10 sm:mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
-		{#each filteredWordlist as word, i}
-			<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
-		{/each}
-	</main>
-{:else}
-	<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/20">
-		<p class="px-2">No words found</p>
-		<button
-			on:click={clearSearch}
-			class="bg-neutral-50/5 px-2 hover:text-neutral-50/40 focus:ring-2 ring-neutral-600 focus:outline-none flex items-center gap-2 rounded-sm"
-		>
-			Clear
-			<Icon icon="ic:twotone-clear" />
-		</button>
-	</div>
-{/if}
+<section>
+	{#if filteredWordlist?.length}
+		<div class="mt-10 sm:mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
+			{#each filteredWordlist as word, i}
+				<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
+			{/each}
+		</div>
+	{:else}
+		<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/20">
+			<p class="px-2">No words found</p>
+			<button
+				on:click={clearSearch}
+				class="bg-neutral-50/5 px-2 hover:text-neutral-50/40 focus:ring-2 ring-neutral-600 focus:outline-none flex items-center gap-2 rounded-sm"
+			>
+				Clear
+				<Icon icon="ic:twotone-clear" />
+			</button>
+		</div>
+	{/if}
+</section>

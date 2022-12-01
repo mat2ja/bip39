@@ -2,7 +2,7 @@ import en from './../wordlists/english.json';
 import fr from './../wordlists/french.json';
 import cz from './../wordlists/czech.json';
 import cn from './../wordlists/chinese_simplified.json';
-import cnAlt from './../wordlists/chinese_traditional.json';
+import cnt from './../wordlists/chinese_traditional.json';
 import it from './../wordlists/italian.json';
 import jp from './../wordlists/japanese.json';
 import kr from './../wordlists/korean.json';
@@ -14,8 +14,8 @@ export const wordlist = {
 	en,
 	fr,
 	cz,
-	// cn,
-	// cnAlt,
+	cn,
+	cnt,
 	it,
 	jp,
 	kr,

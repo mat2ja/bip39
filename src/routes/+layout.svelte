@@ -20,7 +20,7 @@
 </svelte:head>
 
 <div
-	class="pt-[30vh] pb-20 sm:pb-32 px-8 max-w-6xl mx-auto space-y-20 sm:space-y-32 relative flex flex-col min-h-screen font-mono"
+	class="pt-[25vh] pb-20 sm:pb-32 px-8 max-w-6xl mx-auto space-y-20 sm:space-y-32 relative flex flex-col min-h-screen font-mono"
 >
 	<main class="flex-1">
 		<slot />
