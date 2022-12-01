@@ -8,7 +8,7 @@
 </script>
 
 <div
-	class="px-2 relative py-1 hover:bg-neutral-50/5"
+	class="px-2 relative py-1 hover:bg-neutral-50/5 rounded-sm"
 	class:higlighted
 	style={`--letter: '${firstLetter}'`}
 >

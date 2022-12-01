@@ -4,10 +4,34 @@
 
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap');
 
+:root {
+	--orange-500: #f97316;
+}
+
 html {
 	color-scheme: dark;
 }
 
 body {
 	@apply bg-neutral-900 text-neutral-300;
+}
+
+::selection {
+	@apply bg-orange-500 text-neutral-900;
+}
+
+html {
+	scrollbar-width: thin;
+	scrollbar-color: var(--orange-500) transparent;
+}
+
+::-webkit-scrollbar {
+	height: 5px;
+	width: 5px;
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--orange-500);
+	-webkit-border-radius: 1ex;
 }
