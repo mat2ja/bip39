@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sf-mono?styles=36554,36555');
 
 :root {
 	--orange-500: #f97316;
@@ -13,6 +13,8 @@ html {
 }
 
 body {
+	font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas,
+		monospace;
 	@apply bg-neutral-900 text-neutral-300;
 }
 
