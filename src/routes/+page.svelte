@@ -56,6 +56,9 @@
 		const firstLetter = (word: string) => word.at(0);
 		return firstLetter(word) !== firstLetter(filteredWordlist[idx - 1]);
 	};
+
+	const alpha = Array.from(Array(26)).map((e, i) => i + 65);
+	const alphabet = alpha.map((x) => String.fromCharCode(x).toUpperCase());
 </script>
 
 <header>
@@ -65,6 +68,14 @@
 
 		<WordSearch bind:search />
 	</div>
+
+	<!-- <div class="flex items-center justify-between py-2 mt-8 text-neutral-50/20 ">
+		{#each alphabet as letter}
+			<a class="block flex-1 hover:text-orange-500" href="#{letter}">
+				{letter}
+			</a>
+		{/each}
+	</div> -->
 </header>
 
 <section>
