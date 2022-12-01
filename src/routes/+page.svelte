@@ -1,15 +1,23 @@
 <script lang="ts">
-	import Word from '../lib/components/Word.svelte';
+	import Word from '$lib/components/Word.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
-	$: ({ wordlist } = data);
+	const { wordlist } = data;
 
 	const isFirstExampleOfLetter = (word: string, index: number) => {
 		if (index === 0) return true;
-		return word[0] !== wordlist[index - 1][0];
+		const firstLetter = (word: string) => word.at(0);
+		return firstLetter(word) !== firstLetter(wordlist[index - 1]);
 	};
 </script>
+
+<svelte:head>
+	<title>BIP39 Wordlist</title>
+	<style>
+		@import url('https://fonts.cdnfonts.com/css/sf-mono?styles=36554,36555');
+	</style>
+</svelte:head>
 
 <header>
 	<h1 class="text-2xl">BIP39 Wordlist</h1>
