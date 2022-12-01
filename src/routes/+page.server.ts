@@ -1,8 +1,5 @@
-import { wordlist } from './wordlist.server';
+import { redirect } from '@sveltejs/kit';
 
-/** @type {import('./$types').PageLoad} */
-export function load() {
-  return {
-    wordlist
-  };
-}
+export const load = () => {
+	throw redirect(307, '/bip39');
+};

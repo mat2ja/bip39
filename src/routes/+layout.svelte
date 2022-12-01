@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import Footer from '$lib/components/Footer.svelte';
+	import Nav from '$lib/components/Nav.svelte';
 	import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -19,20 +20,22 @@
 	</style>
 </svelte:head>
 
-<div
-	class="relative mx-auto flex min-h-screen max-w-6xl flex-col space-y-12 px-8 pt-[25vh] pb-12 font-mono sm:space-y-24 sm:pb-24"
->
-	<main class="flex-1">
-		<slot />
-	</main>
+<div class="relative mx-auto flex min-h-screen max-w-6xl flex-col px-8 pb-12 font-mono sm:pb-24">
+	<Nav />
 
-	{#if scrollToTopShown}
-		<div in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
-			<ScrollToTopButton />
+	<div class="flex flex-1 flex-col space-y-12 pt-[20vh] sm:space-y-24">
+		<main class="flex h-full flex-1 flex-col">
+			<slot />
+		</main>
+
+		{#if scrollToTopShown}
+			<div in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>
+				<ScrollToTopButton />
+			</div>
+		{/if}
+
+		<div class="mt-auto">
+			<Footer />
 		</div>
-	{/if}
-
-	<div class="mt-auto">
-		<Footer />
 	</div>
 </div>
