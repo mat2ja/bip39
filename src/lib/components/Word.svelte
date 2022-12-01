@@ -9,7 +9,7 @@
 
 <div
 	id={higlighted ? `${firstLetter}` : undefined}
-	class="relative px-2 py-1 hover:bg-neutral-50/5 rounded-sm"
+	class="relative rounded-sm px-2 py-1 hover:bg-neutral-50/5"
 	class:higlighted
 	style={`--letter: '${firstLetter}'`}
 >
@@ -33,7 +33,7 @@
 
 		&::before {
 			content: var(--letter);
-			@apply absolute left-[-20px] text-orange-500 font-semibold;
+			@apply absolute left-[-20px] font-semibold text-orange-500;
 		}
 	}
 </style>

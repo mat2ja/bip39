@@ -13,14 +13,14 @@
 <svelte:window bind:scrollY={y} bind:innerHeight={height} />
 
 <svelte:head>
-	<title>BIP39 Wordlist</title>
+	<title>bip39</title>
 	<style>
 		@import url('https://fonts.cdnfonts.com/css/sf-mono?styles=36554,36555,36556');
 	</style>
 </svelte:head>
 
 <div
-	class="pt-[25vh] pb-20 sm:pb-32 px-8 max-w-6xl mx-auto space-y-20 sm:space-y-32 relative flex flex-col min-h-screen font-mono"
+	class="relative mx-auto flex min-h-screen max-w-6xl flex-col space-y-12 px-8 pt-[25vh] pb-12 font-mono sm:space-y-24 sm:pb-24"
 >
 	<main class="flex-1">
 		<slot />

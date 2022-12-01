@@ -7,12 +7,12 @@
 </script>
 
 <div class="fixed bottom-8 right-8">
-	<div class="bg-neutral-900 rounded-full">
+	<div class="rounded-full bg-neutral-900">
 		<button
 			on:click={scrollToTop}
-			class="z-100 p-2 bg-orange-400/20 hover:bg-orange-400/25 text-red-500 rounded-full focus:outline-none ring-orange-500 shadow focus-visible:ring-2 active:scale-95 transition"
+			class="z-100 rounded-full bg-orange-400/20 p-2 text-red-500 shadow ring-orange-500 transition hover:bg-orange-400/25 focus:outline-none focus-visible:outline-none focus-visible:ring-2 active:scale-95"
 		>
-			<Icon icon="mdi:chevron-up" class="text-orange-400 text-4xl" />
+			<Icon icon="mdi:chevron-up" class="text-4xl text-orange-400" />
 		</button>
 	</div>
 </div>

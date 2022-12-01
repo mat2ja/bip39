@@ -1,9 +1,9 @@
 <div>
-	<h1 class="text-2xl">BIP39 Wordlist</h1>
+	<h1 class="text-2xl">bip39 wordlist</h1>
 	<a
 		href="https://halborn.com/what-is-a-bip39/"
-		class="inline-block -ml-1 px-1 mt-2 underline text-sm text-neutral-300/90 decoration-orange-400/50  hover:decoration-orange-400 hover:bg-orange-400/20 hover:opacity-100 rounded-sm"
+		class="-ml-1 mt-2 inline-block rounded-sm px-1 text-sm text-neutral-300/90 underline  decoration-orange-400/50 ring-orange-500 ring-orange-500 hover:bg-orange-400/20 hover:decoration-orange-400 hover:opacity-100 focus:outline-none focus:ring-2 focus-visible:outline-none"
 	>
-		What is BIP39?
+		what is bip39?
 	</a>
 </div>

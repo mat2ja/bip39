@@ -56,44 +56,33 @@
 		const firstLetter = (word: string) => word.at(0);
 		return firstLetter(word) !== firstLetter(filteredWordlist[idx - 1]);
 	};
-
-	const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-	const alphabet = alpha.map((x) => String.fromCharCode(x).toUpperCase());
 </script>
 
 <header>
 	<LanguagePicker bind:lang {wordlists} />
-	<div class="flex flex-col sm:flex-row items-start justify-between gap-8 mt-6">
+	<div class="mt-6 flex flex-col items-start justify-between gap-8 sm:flex-row">
 		<HeaderInfo />
 
 		<WordSearch bind:search />
 	</div>
-
-	<!-- <div class="flex items-center justify-between py-2 mt-8 text-neutral-50/20 ">
-		{#each alphabet as letter}
-			<a class="block flex-1 hover:text-orange-500" href="#{letter}">
-				{letter}
-			</a>
-		{/each}
-	</div> -->
 </header>
 
 <section>
 	{#if filteredWordlist?.length}
-		<div class="mt-10 sm:mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
+		<div class="mt-10 cursor-crosshair columns-1 gap-8 sm:mt-16 sm:columns-3 md:columns-4">
 			{#each filteredWordlist as word, i}
 				<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
 			{/each}
 		</div>
 	{:else}
 		<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/20">
-			<p class="px-2">No words found</p>
+			<p class="px-2">no words found</p>
 			<button
 				on:click={clearSearch}
-				class="bg-neutral-50/5 px-2 hover:text-neutral-50/40 focus:ring-2 ring-neutral-600 focus:outline-none flex items-center gap-2 rounded-sm"
+				class="flex items-center gap-1 rounded-sm bg-neutral-50/5 px-2 py-1 text-sm ring-neutral-600 hover:text-neutral-50/40 focus:outline-none focus:ring-2"
 			>
-				Clear
-				<Icon icon="ic:twotone-clear" />
+				clear
+				<Icon icon="ic:sharp-clear" class="text-base" />
 			</button>
 		</div>
 	{/if}
