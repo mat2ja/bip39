@@ -26,7 +26,7 @@
 	};
 </script>
 
-<header class="flex items-center justify-between gap-8">
+<header class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-8">
 	<div>
 		<h1 class="text-2xl">BIP39 Wordlist</h1>
 		<a
@@ -42,18 +42,18 @@
 		placeholder="Search"
 		type="search"
 		bind:value={search}
-		class="py-2 px-3 bg-neutral-50/5 focus:ring-1 ring-orange-500 focus:outline-none placeholder:text-neutral-600 rounded-sm"
+		class="py-2 px-3 bg-neutral-50/5 focus:ring-1 ring-orange-500 focus:outline-none placeholder:text-neutral-600 rounded-sm w-full sm:w-fit "
 	/>
 </header>
 
 {#if filteredWordlist?.length}
-	<main class="mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
+	<main class="mt-10 sm:mt-16 columns-1 sm:columns-3 md:columns-4 gap-8 cursor-crosshair">
 		{#each filteredWordlist as word, i}
 			<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
 		{/each}
 	</main>
 {:else}
-	<div class="mt-10 py-8 flex flex-col items-center justify-center gap-5 text-neutral-50/40">
+	<div class="mt-20 flex flex-col items-center justify-center gap-5 text-neutral-50/40">
 		<p class="px-2">No words found</p>
 		<button
 			on:click={clearSearch}
