@@ -19,7 +19,7 @@ body {
 }
 
 ::selection {
-	@apply bg-neutral-600 text-neutral-900;
+	@apply bg-orange-500 text-neutral-900;
 }
 
 ::-webkit-scrollbar {
