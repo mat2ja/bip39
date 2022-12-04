@@ -11,7 +11,7 @@
 	let languages = Object.keys(wordlists).sort() as Lang[];
 </script>
 
-<div class="flex items-center justify-end gap-1 text-neutral-50/20">
+<div class="flex flex-wrap items-center justify-end gap-1  text-neutral-50/20">
 	{#each languages as $lang}
 		<button
 			aria-label="Set language to {$lang}"
