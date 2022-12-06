@@ -1,4 +1,5 @@
 import type { BtcCOMAddress } from '$lib/models/balance';
+import { satsToBtc } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from '../$types';
 import type { Actions } from './$types';
@@ -7,11 +8,19 @@ export const load: PageServerLoad = async () => {
 	return {};
 };
 
-const fetchBalance = async (address: string) => {
-	// const url = `https://blockchain.info/rawaddr/${address}`;
-	const url = `https://chain.api.btc.com/v3/address/${address}`;
+const fetchBtcData = async () => {
+	const url = 'https://api.blockchair.com/bitcoin/stats'
+	const { data } = await fetch(url).then((res) => res.json());
+	const { market_price_usd } = data
+	return market_price_usd
+}
 
+const fetchBalance = async (address: string) => {
+	const url = `https://chain.api.btc.com/v3/address/${address}`;
+	// get bitcoin value in us dollars
 	const data = await fetch(url).then((res) => res.json());
+
+	await fetchBtcData()
 	return data as BtcCOMAddress;
 };
 
@@ -20,8 +29,12 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const address = formData.get('address') as string;
 
-		const res = await fetchBalance(address);
-		console.log('res :>> ', res);
+		const [res, marketPriceUsd] = await Promise.all([
+			fetchBalance(address),
+			fetchBtcData()
+		])
+
+		const usdValue = marketPriceUsd * satsToBtc(res.data.balance)
 
 		const { data, status } = res;
 
@@ -31,6 +44,6 @@ export const actions: Actions = {
 			});
 		}
 
-		return data;
+		return { ...data, usdValue };
 	}
 };

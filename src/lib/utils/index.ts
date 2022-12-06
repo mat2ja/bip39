@@ -5,3 +5,15 @@ export const normalize = (string: string) => {
 export const isEnglish = (word: string) => {
 	return /^[a-z]+$/i.test(word);
 };
+
+
+export const satsToBtc = (sats: number) => {
+	return sats / 100000000;
+};
+
+export const formatCurrency = (value: number) => {
+	return new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	}).format(value);
+}
