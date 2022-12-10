@@ -1,16 +1,16 @@
 <script lang="ts">
 	export let ordinal: number;
 	export let word: string;
-	export let higlighted: boolean = false;
+	export let highlighted: boolean = false;
 
 	$: paddedNumeral = ordinal.toString().padStart(4, '0');
 	$: firstLetter = word[0].toUpperCase();
 </script>
 
 <div
-	id={higlighted ? `${firstLetter}` : undefined}
+	id={highlighted ? `${firstLetter}` : undefined}
 	class="relative rounded-sm px-2 py-1 hover:bg-neutral-50/5"
-	class:higlighted
+	class:highlighted
 	style={`--letter: '${firstLetter}'`}
 >
 	<span class="numeral text-neutral-50/20">{paddedNumeral}</span>
@@ -18,7 +18,7 @@
 </div>
 
 <style lang="postcss">
-	.higlighted {
+	.highlighted {
 		--letter: 'A';
 		@apply bg-orange-400/10;
 		color: var(--hg-color);

@@ -3,7 +3,7 @@ export const normalize = (string: string) => {
 };
 
 export const isEnglish = (word: string) => {
-	return /^[a-z]+$/i.test(word);
+	return /^[a-z0-9]+$/i.test(word);
 };
 
 

@@ -1,15 +1,12 @@
 <script lang="ts">
 	import HeaderInfo from '$lib/components/bip39/HeaderInfo.svelte';
 	import LanguagePicker from '$lib/components/bip39/LanguagePicker.svelte';
-	import Word from '../../lib/components/bip39/Word.svelte';
-	import { isEnglish, normalize } from '$lib/utils';
-	import Icon from '@iconify/svelte';
-	import type { PageData } from '../$types';
 	import SearchInput from '$lib/components/SearchInput.svelte';
 	import type { Lang } from '$lib/models/bip39';
-
-	export let data: PageData;
-	const { wordlist: wordlists } = data;
+	import { isEnglish, normalize } from '$lib/utils';
+	import Icon from '@iconify/svelte';
+	import Word from '../../lib/components/bip39/Word.svelte';
+	import { wordlist as wordlists } from './wordlist';
 
 	let lang: Lang = 'en';
 	$: wordlist = wordlists[lang];
@@ -39,10 +36,13 @@
 		if (normalizedWordMatch) return true;
 
 		const parsedNumber = parseInt(_search);
+		console.log(parsedNumber);
 		if (isNaN(parsedNumber)) return false;
 
-		const paddedOrdinalMatch = paddedOrdinal(word).startsWith(search);
-		const ordinalMatch = wordOrdinal(word).toString().startsWith(parsedNumber.toString());
+		const parsedNumberString = parsedNumber.toString();
+
+		const paddedOrdinalMatch = paddedOrdinal(word).startsWith(parsedNumberString);
+		const ordinalMatch = wordOrdinal(word).toString().startsWith(parsedNumberString);
 
 		return paddedOrdinalMatch || ordinalMatch;
 	});
@@ -57,8 +57,8 @@
 	};
 </script>
 
-<div class="space-y-8">
-	<header>
+<div>
+	<header class="mb-8">
 		<LanguagePicker bind:lang {wordlists} />
 		<div class="mt-6 flex flex-col items-start justify-between gap-8 sm:flex-row">
 			<HeaderInfo />
@@ -71,7 +71,7 @@
 		{#if filteredWordlist?.length}
 			<div class="cursor-crosshair columns-1 gap-8 sm:mt-16 sm:columns-3 md:columns-4">
 				{#each filteredWordlist as word, i}
-					<Word {word} ordinal={wordOrdinal(word)} higlighted={isFirstExampleOfLetter(word, i)} />
+					<Word {word} ordinal={wordOrdinal(word)} highlighted={isFirstExampleOfLetter(word, i)} />
 				{/each}
 			</div>
 		{:else}
@@ -87,4 +87,16 @@
 			</div>
 		{/if}
 	</section>
+
+	<div class="mt-12 px-1">
+		<a
+			href="https://github.com/bitcoin/bips/blob/master/bip-0039/bip-0039-wordlists.md"
+			target="_blank"
+			rel="noreferrer"
+			class="flex items-center gap-2 text-neutral-50/20 hover:underline"
+		>
+			source
+			<Icon icon="ic:sharp-arrow-outward" />
+		</a>
+	</div>
 </div>
