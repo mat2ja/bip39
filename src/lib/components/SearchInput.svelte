@@ -5,6 +5,7 @@
 	export let value = '';
 	export let classes = '';
 	export let name = '';
+	export let placeholder = 'search';
 
 	$: hasValue = !!normalize(value.trim())?.length;
 </script>
@@ -17,10 +18,10 @@
 	</button>
 	<input
 		aria-label="Search word"
-		placeholder="search"
 		type="text"
 		bind:value
 		class={`w-full bg-transparent py-2 px-3 placeholder:text-neutral-600 focus:outline-none focus-visible:outline-none ${classes}`}
+		{placeholder}
 		{name}
 	/>
 	{#if hasValue}
