@@ -1,7 +1,5 @@
 {
-	"name": "svelte-bip39",
-	"version": "0.0.1",
-	"private": true,
+	"name": "btc-tools",
 	"scripts": {
 		"dev": "vite dev",
 		"dev:proxy": "caddy run",
