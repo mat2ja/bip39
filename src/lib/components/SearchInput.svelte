@@ -14,7 +14,7 @@
 	class="relative flex w-full items-center rounded-sm bg-neutral-800/60 px-3 pr-7 ring-orange-500 focus-within:ring-2 focus-visible:outline-none focus-visible:ring-2 sm:w-fit"
 >
 	<button>
-		<Icon icon="ic:sharp-search" class="text-xl text-neutral-600" type="submit" />
+		<Icon icon="ic:sharp-search" class="text-xl text-neutral-600" />
 	</button>
 	<input
 		aria-label="Search word"

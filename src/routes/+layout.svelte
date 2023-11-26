@@ -1,7 +1,6 @@
 <script>
 	import '../app.css';
 	import Footer from '$lib/components/Footer.svelte';
-	import Nav from '$lib/components/Nav.svelte';
 	import ScrollToTopButton from '$lib/components/ScrollToTopButton.svelte';
 	import { fade } from 'svelte/transition';
 
@@ -14,7 +13,7 @@
 <svelte:window bind:scrollY={y} bind:innerHeight={height} />
 
 <svelte:head>
-	<title>bip39</title>
+	<title>bip39 wordlist</title>
 	<style>
 		@import url('https://fonts.cdnfonts.com/css/sf-mono?styles=36554,36555,36556');
 	</style>
@@ -23,9 +22,7 @@
 <div
 	class="relative mx-auto flex min-h-screen max-w-6xl flex-col gap-8 px-8 pb-12 font-mono sm:pb-16"
 >
-	<Nav />
-
-	<main class="flex h-full flex-1 flex-col">
+	<main class="flex h-full flex-1 flex-col pt-[15vh] pb-32">
 		<slot />
 	</main>
 

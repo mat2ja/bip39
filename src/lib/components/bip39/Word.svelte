@@ -4,7 +4,7 @@
 	export let highlighted: boolean = false;
 
 	$: paddedNumeral = ordinal.toString().padStart(4, '0');
-	$: firstLetter = word[0].toUpperCase();
+	$: firstLetter = word?.at(0)?.toUpperCase();
 </script>
 
 <div
@@ -17,23 +17,23 @@
 	<span>{word}</span>
 </div>
 
-<style lang="postcss">
+<style>
 	.highlighted {
 		--letter: 'A';
 		@apply bg-orange-400/10;
 		color: var(--hg-color);
+	}
 
-		.numeral {
-			@apply text-orange-400/40;
-		}
+	.highlighted .numeral {
+		@apply text-orange-400/40;
+	}
 
-		&:hover {
-			@apply bg-neutral-50/5;
-		}
+	.highlighted:hover {
+		@apply bg-neutral-50/5;
+	}
 
-		&::before {
-			content: var(--letter);
-			@apply absolute left-[-20px] font-semibold text-orange-500;
-		}
+	.highlighted::before {
+		content: var(--letter);
+		@apply absolute left-[-20px] font-semibold text-orange-500;
 	}
 </style>
