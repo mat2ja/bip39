@@ -1,5 +1,6 @@
 {
   "name": "bip39-words",
+  "description": "BIP-39 words lookup tool",
   "version": "0.0.1",
   "private": true,
   "scripts": {
