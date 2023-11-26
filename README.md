@@ -1,3 +1,3 @@
-# bip39 wordlist
+# 🔍 BIP-39 words lookup tool
 
-<img width="1512" alt="App screenshot" src="https://user-images.githubusercontent.com/46557266/205133316-1e56236c-8fcf-4970-8ee7-43ec98ffb85f.png">
+![CleanShot 2023-11-26 at 22 29 17@2x](https://github.com/matijaoe/bip39-words/assets/46557266/724882fc-951a-435b-9019-f15724a4696b)
